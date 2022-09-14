@@ -10,15 +10,23 @@ export class ErrorMsgDirective implements OnInit, OnChanges  {
   public htmlElement: ElementRef<HTMLElement>;
 
   @Input() set color(value: string) {
-    this.htmlElement.nativeElement.style.color = value;
     this._color = value;
+    this.setColor();
   }
 
   // @Input() message: string = 'Required';
 
   @Input() set message(value: string) {
-    this.htmlElement.nativeElement.innerText = value;
     this._message = value;
+    this.setMessage();
+  }
+
+  @Input() set valid(value: boolean) {
+    if (value) {
+      this.htmlElement.nativeElement.classList.add('hidden');
+    } else {
+      this.htmlElement.nativeElement.classList.remove('hidden');
+    }
   }
 
   constructor( private el: ElementRef<HTMLElement> ) {
@@ -30,18 +38,18 @@ export class ErrorMsgDirective implements OnInit, OnChanges  {
   }
   
   ngOnInit(): void {
-    // this.setColor();
-    // this.setMessage();
+    this.setClass();
+    this.setColor();
+    this.setMessage();
   }
 
-  // setColor(): void {
-  //   this.htmlElement.nativeElement.style.color = this.color;
-  //   this.htmlElement.nativeElement.classList.add('form-text')
-  // }
+  setColor(): void {
+    this.htmlElement.nativeElement.style.color = this._color;
+  }
 
-  // setMessage(): void {
-  //   this.htmlElement.nativeElement.innerText = this.message;
-  // }
+  setMessage(): void {
+    this.htmlElement.nativeElement.innerText = this._message;
+  }
 
   setClass(): void {
     this.htmlElement.nativeElement.classList.add('form-text')

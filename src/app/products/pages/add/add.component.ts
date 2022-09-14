@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styles: [
   ]
 })
-export class AddComponent implements OnInit {
+export class AddComponent {
 
   text: string = 'Write your name';
   color: string = 'red';
@@ -18,11 +18,8 @@ export class AddComponent implements OnInit {
 
   constructor( private fb: FormBuilder ) { }
 
-  ngOnInit(): void {
-  }
-
   invalidForm(field: string): boolean {
-    return this.myForm.get('name')?.invalid || false;
+    return this.myForm.get(field)?.invalid || false;
   }
 
   changeName() {

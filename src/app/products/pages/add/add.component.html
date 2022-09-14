@@ -17,7 +17,7 @@
             <span error-msg
                   [message]="text"
                   [color]="color"
-                  *ngIf="invalidForm('name')">
+                  [valid]="!invalidForm('name')">
             </span>
         </div>
 
@@ -40,3 +40,12 @@
 <h3 class="mt-5">Form</h3>
 <pre>Value: {{ myForm.value | json }}</pre>
 <pre>Value: {{ myForm.valid }}</pre>
+
+<div class="row mt-5" 
+     *customIf="myForm.valid">
+    <div class="col">
+        <div class="alert alert-primary">
+            Ok!
+        </div>
+    </div>
+</div>
